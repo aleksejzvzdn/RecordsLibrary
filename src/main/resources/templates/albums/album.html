@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title th:text="${album.getName()}"></title>
+</head>
+
+<body>
+   <div class="container">
+       <h3 th:text="${album.getName()}"></h3>
+       <hr>
+       <p class="h4 mb-4" th:text="${'Release Date: ' + #dates.format(album.getReleaseDate(), 'dd.MM.yyyy')}"></p>
+       <hr>
+       <p class="h4 mb-4">TrackList:</p>
+       <div th:each="track : ${album.getTracks()}">
+           <p class="h6 mb-2" th:text="${track.getName()}"></p>
+       </div>
+       <hr>
+       <a th:href="@{/albums/list}">Back to Album List</a>
+   </div>
+</body>
+
+</html>

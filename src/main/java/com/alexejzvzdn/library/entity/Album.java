@@ -1,6 +1,7 @@
 package com.alexejzvzdn.library.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,7 +44,31 @@ public class Album {
 	@Column(name="condition")
 	private String condition;
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="album")
+	private List<Track> tracks;
+	
 	public Album() {
+	}
+
+	public Album(String name, Author author, Date releaseDate, Date manufactureDate, String condition,
+			List<Track> tracks) {
+		this.name = name;
+		this.author = author;
+		this.releaseDate = releaseDate;
+		this.manufactureDate = manufactureDate;
+		this.condition = condition;
+		this.tracks = tracks;
+	}
+	
+	public Album(int id, String name, Author author, Date releaseDate, Date manufactureDate, String condition,
+			List<Track> tracks) {
+		this.id = id;
+		this.name = name;
+		this.author = author;
+		this.releaseDate = releaseDate;
+		this.manufactureDate = manufactureDate;
+		this.condition = condition;
+		this.tracks = tracks;
 	}
 
 	public Album(String name, Author author, Date releaseDate, Date manufactureDate, String condition) {
@@ -52,7 +78,7 @@ public class Album {
 		this.manufactureDate = manufactureDate;
 		this.condition = condition;
 	}
-	
+
 	public Album(int id, String name, Author author, Date releaseDate, Date manufactureDate, String condition) {
 		this.id = id;
 		this.name = name;
@@ -108,5 +134,13 @@ public class Album {
 
 	public void setCondition(String condition) {
 		this.condition = condition;
+	}
+
+	public List<Track> getTracks() {
+		return tracks;
+	}
+
+	public void setTracks(List<Track> tracks) {
+		this.tracks = tracks;
 	}
 }

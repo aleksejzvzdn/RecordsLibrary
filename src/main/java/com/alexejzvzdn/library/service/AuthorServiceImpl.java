@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.alexejzvzdn.library.dao.AuthorRepository;
 import com.alexejzvzdn.library.entity.Author;
 
+@Service
 public class AuthorServiceImpl implements AuthorService {
 	
 	private AuthorRepository authorRepository;
@@ -43,5 +45,4 @@ public class AuthorServiceImpl implements AuthorService {
 	public void deleteById(int id) {
 		authorRepository.deleteById(id);
 	}
-
 }
