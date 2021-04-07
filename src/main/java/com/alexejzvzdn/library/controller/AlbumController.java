@@ -63,4 +63,11 @@ public class AlbumController {
 		model.addAttribute("album", album);
 		return "/albums/album";
 	}
+	
+	@GetMapping("/showFormToSetTracks")
+	public String showFormToSetTracks(@RequestParam("id") int id, Model model) {
+		Album album = albumService.findById(id);
+		model.addAttribute("album", album);
+		return "/tracks/tracks-form";
+	}
 }

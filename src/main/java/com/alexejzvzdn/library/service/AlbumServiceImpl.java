@@ -7,16 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alexejzvzdn.library.dao.AlbumRepository;
+import com.alexejzvzdn.library.dao.AuthorRepository;
 import com.alexejzvzdn.library.entity.Album;
+import com.alexejzvzdn.library.entity.Author;
 
 @Service
 public class AlbumServiceImpl implements AlbumService {
 	
 	private AlbumRepository albumRepository;
+	private AuthorRepository authorRepository;
 	
 	@Autowired
-	public AlbumServiceImpl(AlbumRepository albumRepository) {
+	public AlbumServiceImpl(AlbumRepository albumRepository, AuthorRepository authorRepository) {
 		this.albumRepository = albumRepository;
+		this.authorRepository = authorRepository;
 	}
 
 	@Override
@@ -38,6 +42,15 @@ public class AlbumServiceImpl implements AlbumService {
 
 	@Override
 	public void save(Album album) {
+		Optional<Author> resultAuthor = authorRepository.findByNameIgnoreCase(album.getAuthor().getName());
+		Author author = null;
+		if (resultAuthor.isPresent()) {
+			author = resultAuthor.get();
+			List<Album> list = author.getAlbums();
+			list.add(album);
+			author.setAlbums(list);
+			album.setAuthor(author);
+		}
 		albumRepository.save(album);
 	}
 

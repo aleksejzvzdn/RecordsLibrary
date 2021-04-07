@@ -13,4 +13,6 @@ public interface AuthorService {
 	public void save(Author author);
 	
 	public void deleteById(int id);
+	
+	public Author findByName(String name);
 }

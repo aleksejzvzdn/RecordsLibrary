@@ -45,4 +45,16 @@ public class AuthorServiceImpl implements AuthorService {
 	public void deleteById(int id) {
 		authorRepository.deleteById(id);
 	}
+
+	@Override
+	public Author findByName(String name) {
+		Optional<Author> result = authorRepository.findByNameIgnoreCase(name);
+		Author author = null;
+		if (result.isPresent()) {
+			author = result.get();
+		} else {
+			throw new RuntimeException("Didn't find author" + name); 
+		}
+		return author;
+	}
 }

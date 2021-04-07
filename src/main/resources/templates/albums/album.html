@@ -23,6 +23,11 @@
            <p class="h6 mb-2" th:text="${track.getName()}"></p>
        </div>
        <hr>
+       <a th:href="@{/albums/showFormToSetTracks(id=${album.getId()})}"
+	    class="btn btn-primary btn-sm mb-3">
+	    Set TrackList
+	   </a>
+       <hr>
        <a th:href="@{/albums/list}">Back to Album List</a>
    </div>
 </body>
